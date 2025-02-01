@@ -5,6 +5,8 @@ export interface ThemeColors {
 	gray20: string;
 	gray30: string;
 	gray40: string;
+	gray50: string;
+	gray60: string;
 }
 
 export interface ThemeFonts {
@@ -58,8 +60,10 @@ export const lightTheme: Theme = {
 		white: '#FFFFFF',
 		gray10: '#EEEEF0',
 		gray20: '#8D8D99',
-		gray30: '#7C7C8a',
+		gray30: '#6F6D78',
 		gray40: '#323228',
+		gray50: '#1A191B',
+		gray60: '#1A191B'
 	},
 	fonts: {
 		family: {
@@ -103,10 +107,12 @@ export const darkTheme: Theme = {
 		...purpleDark,
 		...mauveDark,
 		white: '#FFFFFF',
-		gray10: '#E1E1E6',
+		gray10: '#EEEEF0',
 		gray20: '#8D8D99',
-		gray30: '#7C7C8a',
+		gray30: '#6F6D78',
 		gray40: '#323228',
+		gray50: '#1A191B',
+		gray60: '#1A191B'
 	},
 	fonts: {
 		family: {

@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react'
-import {Navbar} from './core/templates/layout/Navbar';
+import {Navbar} from './templates/layout/Navbar';
 import {Movie, tmdbService} from "./shared/services/movies-service.ts";
 import {BackgroundContainer, Content} from "./App.ts";
+import {SearchInput} from "./components/SearchInput";
 
 function App() {
   
@@ -23,7 +24,8 @@ function App() {
   return (
     <BackgroundContainer>
       <Content>
-        <Navbar></Navbar>
+        <Navbar />
+        <SearchInput />
         <ul>
           {movies && movies.map((movie) => (
             <li key={movie.id}>{movie.title}</li>
