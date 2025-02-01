@@ -1,36 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {useEffect, useState} from 'react'
 import {Navbar} from './core/templates/layout/Navbar';
+import {Movie, tmdbService} from "./shared/services/movies-service.ts";
+import {BackgroundContainer, Content} from "./App.ts";
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  const [movies, setMovies] = useState<Movie[]>([]);
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const data = await tmdbService.getPopularMovies();
+        setMovies(data.results)
+        console.log(data)
+      }catch (err) {
+        console.log(err);
+      }
+    };
+    
+    fetchMovies().then();
+  }, []);
 
   return (
-    <>
-      <Navbar></Navbar>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BackgroundContainer>
+      <Content>
+        <Navbar></Navbar>
+        <ul>
+          {movies && movies.map((movie) => (
+            <li key={movie.id}>{movie.title}</li>
+          ))}
+        </ul>
+      </Content>
+    </BackgroundContainer>
   )
 }
 
