@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 import backgroundImage from './assets/backgropund-krists-luhaers-unsplash.png';
 
-// Componente estilizado para o container com a imagem de fundo e a sobreposição
 export const BackgroundContainer = styled.div`
     position: relative;
     width: 100%;
-    height: 100vh; /* Altura total da viewport */
-		background-color: black;
-    background-image: url(${backgroundImage}); /* Substitua pelo caminho da sua imagem */
-    background-size: cover;
+    height: 100vh; 
+    background-color: black;
+    background-image: url(${backgroundImage});
+    background-size: auto;
     background-position: center;
-		z-index: 10;
-
-    /* Sobreposição preta com opacidade */
+    z-index: 10;
+    
     &::before {
         content: '';
         position: absolute;
@@ -24,10 +22,9 @@ export const BackgroundContainer = styled.div`
     }
 `;
 
-// Componente de conteúdo que ficará sobre a imagem de fundo
 export const Content = styled.div`
   position: relative;
-  z-index: 1; /* Garante que o conteúdo fique acima da sobreposição */
-  color: white; /* Cor do texto para contrastar com o fundo */
+  z-index: 1; 
+  color: white;
   text-align: center;
 `;
