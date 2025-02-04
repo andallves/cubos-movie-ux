@@ -4,7 +4,7 @@ import backgroundImage from './assets/backgropund-krists-luhaers-unsplash.png';
 export const BackgroundContainer = styled.div`
     position: relative;
     width: 100%;
-    height: 100vh; 
+    height: 100%; 
     background-color: black;
     background-image: url(${backgroundImage});
     background-size: auto;

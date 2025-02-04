@@ -61,7 +61,7 @@ export const SearchIcon = styled.img`
 `;
 
 interface ButtonFilterProps {
-    active?: boolean;
+    $active?: boolean;
 }
 
 export const ButtonFilter = styled.button<ButtonFilterProps>`
@@ -75,7 +75,7 @@ export const ButtonFilter = styled.button<ButtonFilterProps>`
     align-self: stretch;
 
     border-radius: .2rem;
-    background: ${({ active }) => (active ? '#8E4EC6' : 'rgba(183, 68, 247, 0.08)')};
+    background: ${({ $active }) => ($active ? '#8E4EC6' : 'rgba(183, 68, 247, 0.08)')};
     backdrop-filter: blur(.2rem);
     cursor: pointer;
 `;

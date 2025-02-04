@@ -1,100 +1,66 @@
-import {useEffect, useState} from 'react'
 import {Navbar} from './templates/layout/Navbar';
-import {movieService} from "./services/movies-service.ts";
 import {BackgroundContainer, Content} from "./App.ts";
 import {SearchInput} from "./components/SearchInput";
 import {MovieList} from "./components/MovieList";
+import {Footer} from "./templates/layout/Footer";
+import {useEffect, useState} from "react";
 import {Movie} from "./types/movie.ts";
 import {Genre} from "./types/genre.ts";
-import {genreService} from "./services/genre-service.ts";
+import {movieService} from "./services/movieQueryService/movieService.ts";
+import {genreService} from "./services/genreService/genreService.ts";
 import {mapMovieWithGenre} from "./utils/mapMovieWithGenre.ts";
-
-const FILMES_POR_PAGINA = 10;
+import {movieFilterService} from "./services/movieFilterService/movieFilterService.ts";
+import {Pagination} from "./types/pagination.ts";
+import {QueryParams} from "./types/queryParams.ts";
 
 function App() {
-  
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [moviesWithGenres, setMoviesWithGenres] = useState<Movie[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
 
-  // Calcula o índice inicial e final dos filmes da página atual
-  const indexInitial = (currentPage - 1) * FILMES_POR_PAGINA;
-  const indexFinal = indexInitial + FILMES_POR_PAGINA;
-  const pageMovies = moviesWithGenres.slice(indexInitial, indexFinal);
+    const [movies, setMovies] = useState<Movie[]>([]);
+    const [genres, setGenres] = useState<Genre[]>([]);
+    const [pagination, setPagination] = useState<Pagination>({ page: 1, total_pages: 100 });
+    const [isLoading, setIsLoading] = useState(false);
 
-  // Calcula o número total de páginas
-  const pageTotal = Math.ceil(movies.length / FILMES_POR_PAGINA);
+    const fetchData = async () => {
+        setIsLoading(true)
 
-  // Função para mudar de página
-  const changePage = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
+        try {
+            const movies = await movieService.getMovies(pagination.page);
+            setMovies(movies.results);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const data = await movieService.getPopularMovies();
-        setMovies(data.results)
-        console.log(data)
-      }catch (err) {
-        console.log(err);
-      }
-    };
-
-    const fetchGenres = async () => {
-      try {
-        const data = await genreService.getGenres();
-        setGenres(data.genres);
-      } catch (err) {
-        console.log(err)
-      }
+            const genres = await genreService.getGenres();
+            setGenres(genres.genres)
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
-    fetchMovies().then();
-    fetchGenres().then();
-  }, []);
+    useEffect(() => {
+        fetchData().then();
+    }, [pagination.page]);
 
-  useEffect(() => {
-    setMoviesWithGenres(() => mapMovieWithGenre(movies, genres));
-  }, [movies, genres]);
+    const handleFiltedSearch = async (query: QueryParams) => {
+        console.log("testando se chega aqui")
+        const movies = await movieFilterService.searchMoviesFiltered(query, 1);
+        setMovies(movies.results);
+        setPagination({ total_pages: movies.total_pages, page: movies.page });
 
+    }
+
+    const handlePagination = (page: number) => {
+        setPagination((prevState) => { return { ...prevState, page }});
+    }
+
+    const moviesWithGenres = mapMovieWithGenre(movies, genres);
 
   return (
     <BackgroundContainer>
       <Content>
         <Navbar />
-        <SearchInput />
-        <MovieList movies={pageMovies} />
-        {/* Controles de paginação */}
-        <div>
-          <button
-              onClick={() => changePage(currentPage - 1)}
-              disabled={currentPage === 1}
-          >
-            Anterior
-          </button>
-
-          {/* Exibe os números das páginas */}
-          {Array.from({ length: pageTotal }, (_, index) => (
-              <button
-                  key={index + 1}
-                  onClick={() => changePage(index + 1)}
-                  style={{
-                    fontWeight: currentPage === index + 1 ? "bold" : "normal",
-                  }}
-              >
-                {index + 1}
-              </button>
-          ))}
-
-          <button
-              onClick={() => changePage(currentPage + 1)}
-              disabled={currentPage === pageTotal}
-          >
-            Próxima
-          </button>
-        </div>
+        <SearchInput handleFilter={handleFiltedSearch} />
+        <MovieList movies={moviesWithGenres} pagination={pagination} handlePagination={handlePagination} isLoading={isLoading} />
+        <Footer />
       </Content>
     </BackgroundContainer>
   )
