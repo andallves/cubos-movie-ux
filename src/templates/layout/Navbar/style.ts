@@ -54,6 +54,10 @@ export const ButtonTheme = styled.button`
     background: rgba(183, 68, 247, 0.08);
     backdrop-filter: blur(0.2rem);
     cursor: pointer;
+    
+    &:hover {
+      background: #8E4EC6;
+    }
   `}
 `;
 
