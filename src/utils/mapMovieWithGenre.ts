@@ -1,7 +1,7 @@
-import {Movie} from "../types/movie.ts";
-import {Genre} from "../types/genre.ts";
+import {IMovie} from "../types/movie.ts";
+import {IGenre} from "../types/genre.ts";
 
-export const mapMovieWithGenre = (movies: Movie[], genres: Genre[]): Movie[] => {
+export const mapMovieWithGenre = (movies:IMovie[], genres: IGenre[]): IMovie[] => {
     return movies.map(movie => {
         const genresOfMovie = movie.genre_ids.map(id => {
             const genre = genres.find(g => g.id === id);
