@@ -41,7 +41,7 @@ export const Filter = ({ handleFilter }: FilterProps) => {
     const [inputDirector, setInputDirector] = useState<string>("");
     const [inputActor, setInputActor] = useState<string>("");
     const [inputStreaming, setInputStreaming] = useState<string>("");
-    const [inputSortBy, setInputSortBy] = useState<SortBy>("popularity.asc");
+    const [inputSortBy, setInputSortBy] = useState<SortBy>("popularity.desc");
     const [inputCountry, setInputCountry] = useState<string>("");
 
     useEffect(() => {
