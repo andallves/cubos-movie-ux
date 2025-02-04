@@ -23,12 +23,14 @@ import {SortBySelector} from "./components/SortBySelector";
 import {CountrySelector} from "./components/CountrySelector";
 import {StreamingSelector} from "./components/StreamingSelector";
 import {MemberMovieInput} from "./components/MemberMovieInput";
+import {Commet} from "react-loading-indicators";
 
 interface FilterProps {
     handleFilter: (query: QueryParams) => void;
+    isLoading: boolean
 }
 
-export const Filter = ({ handleFilter }: FilterProps) => {
+export const Filter = ({ handleFilter, isLoading }: FilterProps) => {
     const [genres, setGenres] = useState<Genre[]>([]);
     const [inputGenre, setInputGenre] = useState<string>("");
     const [inputCertification, setInputCertification] = useState<string>("")
@@ -137,7 +139,18 @@ export const Filter = ({ handleFilter }: FilterProps) => {
                     defaultValue={inputSortBy}
                     options={orderingMovies} handleSelectedChange={setInputSortBy} />
             </FormContainer>
-            <ButtonFilter $active={true} type={'submit'}>Aplicar Filtro</ButtonFilter>
+
+            <ButtonFilter
+                $isLoading={true}
+                disabled={isLoading}
+                type={'submit'}
+            >
+                {isLoading ? (
+                    <Commet  color="#fff" />
+                ) : (
+                    <p>Aplicar Filtro</p>
+                )}
+            </ButtonFilter>
         </Form>
     )
 }

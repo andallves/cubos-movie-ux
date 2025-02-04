@@ -19,6 +19,10 @@ export const ContainerMovieList = styled.div`
             margin: 1.6rem;
         }
     `}
+`;
 
-    
+export const ContainerLoading = styled.div`
+    display: flex;
+    align-items: center;
+    height: 30rem;
 `;

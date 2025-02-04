@@ -41,10 +41,16 @@ function App() {
     }, [pagination.page]);
 
     const handleFiltedSearch = async (query: QueryParams) => {
-        console.log("testando se chega aqui")
-        const movies = await movieFilterService.searchMoviesFiltered(query, 1);
-        setMovies(movies.results);
-        setPagination({ total_pages: movies.total_pages, page: movies.page });
+        setIsLoading(true)
+        try {
+            const movies = await movieFilterService.searchMoviesFiltered(query, 1)
+            setMovies(movies.results);
+            setPagination({ total_pages: movies.total_pages, page: movies.page });
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setIsLoading(false);
+        }
 
     }
 
@@ -58,8 +64,14 @@ function App() {
     <BackgroundContainer>
       <Content>
         <Navbar />
-        <SearchInput handleFilter={handleFiltedSearch} />
-        <MovieList movies={moviesWithGenres} pagination={pagination} handlePagination={handlePagination} isLoading={isLoading} />
+        <SearchInput
+            isLoading={isLoading}
+            handleFilter={handleFiltedSearch} />
+        <MovieList
+            movies={moviesWithGenres}
+            pagination={pagination}
+            handlePagination={handlePagination}
+            isLoading={isLoading} />
         <Footer />
       </Content>
     </BackgroundContainer>

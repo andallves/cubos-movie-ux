@@ -92,27 +92,47 @@ export const Input = styled.input`
   `}
 `;
 
-export const ButtonFilter = styled.button<{$active: boolean}>`
+export const ButtonFilter = styled.button<{$isLoading: boolean}>`
     display: flex;
     width: 100%;
     min-height: 4.4rem;
-    padding: 1.2rem 2rem;
+    padding: ${({ $isLoading }) => ( $isLoading ? '1rem 1.6rem' : '1.2rem 2rem')};
     justify-content: center;
     align-items: center;
     gap: 1.2rem;
     align-self: stretch;
-    
+
     color: white;
     font-weight: bold;
     font-size: 1.6rem;
 
     border-radius: .2rem;
-    background: ${({ $active }) => ($active ? '#8E4EC6' : 'rgba(183, 68, 247, 0.08)')};
+    background: #8E4EC6;
     backdrop-filter: blur(.2rem);
     cursor: pointer;
-`;
+    transition: all .5s ease-in-out;
 
-export const SearchIcon = styled.img`
-    width: 2.4rem;
-    height: 2.4rem;
+    &:hover, &:disabled {
+        background: rgba(99, 50, 141, 0.94);
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    &:disabled {
+        cursor: auto;
+    }
+    
+    span.rli-d-i-b.commet-rli-bounding-box, .rli-d-i-b.commet-indicator {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .rli-d-i-b.commet-indicator > .rli-d-i-b.commet-box:first-child {
+        width: 40%;
+        height: 40%;
+    }
+
+    .rli-d-i-b.commet-indicator > .rli-d-i-b.commet-box:nth-child(2) {
+        width: 70%;
+        height: 70%;
+    }
 `;

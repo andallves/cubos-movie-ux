@@ -1,8 +1,9 @@
-import {ContainerMovieList} from "./styles.ts";
+import {ContainerLoading, ContainerMovieList} from "./styles.ts";
 import {MoviePoster} from "../MoviePoster";
 import {Movie} from "../../types/movie.ts";
 import {Pagination as PaginationType} from "../../types/pagination.ts";
 import {Pagination} from "../Pagination";
+import {Commet} from "react-loading-indicators";
 
 type MovieListProps = {
     movies: Movie[];
@@ -21,7 +22,10 @@ export const MovieList = ({ movies, pagination, isLoading, handlePagination }: M
     <>
         <ContainerMovieList>
             {isLoading ? (
-                <p>Loading...</p>
+                <ContainerLoading>
+                    <Commet  color="#8E4EC6" size="medium"  />
+
+                </ContainerLoading>
             ) : (movies.map((movie: Movie) =>
                 <MoviePoster
                     key={movie.id}

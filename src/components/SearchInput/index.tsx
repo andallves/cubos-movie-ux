@@ -7,15 +7,16 @@ import {QueryParams} from "../../types/queryParams.ts";
 
 export interface SearchInputProps {
     handleFilter: (query: QueryParams) => void;
+    isLoading: boolean
 }
-export const SearchInput = ({ handleFilter }: SearchInputProps) => {
-    const [filterFieldShow, setFilterFieldShow] = useState(true);
+export const SearchInput = ({ handleFilter, isLoading }: SearchInputProps) => {
+    const [filterFieldShow, setFilterFieldShow] = useState(false);
 
     const handleChangeFieldShow = () => {
         setFilterFieldShow(!filterFieldShow);
     }
 
-    const handleFiltert = (query: QueryParams) => {
+    const handleSearchFilter = (query: QueryParams) => {
         handleFilter(query);
     }
     return (
@@ -31,7 +32,7 @@ export const SearchInput = ({ handleFilter }: SearchInputProps) => {
                     <FilterIcon src={filterIcon} />
                 </ButtonFilter>
             </Container>
-            {filterFieldShow && <Filter handleFilter={handleFiltert}/>}
+            {filterFieldShow && <Filter isLoading={isLoading} handleFilter={handleSearchFilter}/>}
         </>
     )
 }
