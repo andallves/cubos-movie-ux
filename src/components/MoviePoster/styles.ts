@@ -1,7 +1,7 @@
 import styled, {css} from "styled-components";
 
 interface ImageContainerProps {
-    imageUrl: string;
+    $imageUrl: string;
 }
 
 export const ContainerPoster = styled.div<ImageContainerProps>`
@@ -18,7 +18,7 @@ export const ContainerPoster = styled.div<ImageContainerProps>`
 
     border-radius: .4rem;
 
-    background: url(${({imageUrl}) => imageUrl}) lightgray 0 0 / 100% 100% no-repeat;
+    background: url(${({ $imageUrl }) => ($imageUrl)}) lightgray 0 0 / 100% 100% no-repeat;
     box-shadow: 0 .1rem .5rem 0 rgba(0, 0, 0, 0.20);
 
     &::before {

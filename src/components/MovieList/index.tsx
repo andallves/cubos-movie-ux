@@ -1,21 +1,40 @@
 import {ContainerMovieList} from "./styles.ts";
 import {MoviePoster} from "../MoviePoster";
 import {Movie} from "../../types/movie.ts";
+import {Pagination as PaginationType} from "../../types/pagination.ts";
+import {Pagination} from "../Pagination";
 
 type MovieListProps = {
-    movies?: Movie[];
+    movies: Movie[];
+    pagination: PaginationType;
+    isLoading: boolean;
+    handlePagination: (page: number) => void;
 }
 
-export const MovieList = ({ movies }: MovieListProps) => {
+export const MovieList = ({ movies, pagination, isLoading, handlePagination }: MovieListProps) => {
+
+    const handleMoviesPagined = (page: number) => {
+       handlePagination(page)
+    };
+
     return (
+    <>
         <ContainerMovieList>
-            {movies?.map((movie: Movie) => (
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : (movies.map((movie: Movie) =>
                 <MoviePoster
                     key={movie.id}
+                    id={movie.id}
                     title={movie.title}
                     nameGenres={movie.name_genres}
                     imageUrl={movie.poster_path}/>
             ))}
         </ContainerMovieList>
+        <Pagination
+            currentPage={pagination?.page}
+            totalPage={pagination?.total_pages}
+            handlePageChange={handleMoviesPagined} />
+        </>
     )
 }

@@ -1,15 +1,11 @@
-import {MovieDetails, MovieResponse} from "../types/movie.ts";
-import {api} from "../utils/api.ts";
+import {MovieDetails, MovieResponse} from "../../types/movie.ts";
+import {api} from "../../utils/api.ts";
+import {IMovieService} from "./IMovieService.ts";
 
-export const movieService = {
+export const movieService: IMovieService = {
 
-    async getPopularMovies(page = 1): Promise<MovieResponse> {
-        const response = await api.get<MovieResponse>(`/movie/popular`, {
-            params: {
-                page,
-            },
-        });
-
+    async getMovies(page = 1): Promise<MovieResponse> {
+        const response = await api.get<MovieResponse>(`/movie/popular`, { params: { page } });
         return response.data;
     },
 

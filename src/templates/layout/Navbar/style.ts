@@ -18,6 +18,7 @@ export const Title = styled.div`
     align-items: center;
     gap: ${theme.spacings.xsmall};
     color:${theme.colors.gray10};
+    cursor: pointer;
   `}
 `;
 
@@ -52,6 +53,7 @@ export const ButtonTheme = styled.button`
     border-radius: 0.2rem;
     background: rgba(183, 68, 247, 0.08);
     backdrop-filter: blur(0.2rem);
+    cursor: pointer;
   `}
 `;
 
