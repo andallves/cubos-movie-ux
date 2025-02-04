@@ -21,7 +21,7 @@ export const MoviePoster = ({ id, title, nameGenres, imageUrl }: MoviePosterProp
             $imageUrl={`${BASE_URL}${imageUrl}`}
             onMouseEnter={() => setShowDetails(true)}
             onMouseLeave={() => setShowDetails(false)}
-            onClick={() => navigate(`/${id}`)}
+            onClick={() => navigate(`/movie/${id}`)}
         >
             {showDetails && (
                 <PieRating colour={'#FFE000'} percentage={10}></PieRating>

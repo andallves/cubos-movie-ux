@@ -1,8 +1,5 @@
-import {Navbar} from './templates/layout/Navbar';
-import {BackgroundContainer, Content} from "./App.ts";
 import {SearchInput} from "./components/SearchInput";
 import {MovieList} from "./components/MovieList";
-import {Footer} from "./templates/layout/Footer";
 import {useEffect, useState} from "react";
 import {Movie} from "./types/movie.ts";
 import {Genre} from "./types/genre.ts";
@@ -61,9 +58,7 @@ function App() {
     const moviesWithGenres = mapMovieWithGenre(movies, genres);
 
   return (
-    <BackgroundContainer>
-      <Content>
-        <Navbar />
+      <>
         <SearchInput
             isLoading={isLoading}
             handleFilter={handleFiltedSearch} />
@@ -72,9 +67,7 @@ function App() {
             pagination={pagination}
             handlePagination={handlePagination}
             isLoading={isLoading} />
-        <Footer />
-      </Content>
-    </BackgroundContainer>
+        </>
   )
 }
 
