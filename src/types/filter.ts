@@ -1,5 +1,3 @@
-import {SortBy} from "../services/movieFilterService/movieFilterService.ts";
-
 export type LanguageMovies = {
     code: string;
     name: string;
@@ -15,3 +13,5 @@ export type OrdenacaoMovies = {
     code: SortBy,
     name: string ,
 }
+
+export type SortBy = "title.asc" | "popularity.asc" | "vote_count.asc" | "primary_release_date.asc";

@@ -1,12 +1,11 @@
 import {genreService} from "../../services/genreService/genreService.ts";
 import {FormEvent, useEffect, useState} from "react";
 import {Genre} from "../../types/genre.ts";
-import {SortBy} from "../../services/movieFilterService/movieFilterService.ts";
 import {ButtonFilter, Form, FormContainer, Input, Label, Select} from "./styles.ts";
 import {MovieLengthEnum} from "../../enums/movieLength.ts";
 import {classificationMovies, languagesMovies, ordenacao} from "../../utils/filter-input-values.ts";
 import {QueryParams} from "../../types/queryParams.ts";
-import {ClassificationMovies, LanguageMovies} from "../../types/filter.ts";
+import {ClassificationMovies, LanguageMovies, SortBy} from "../../types/filter.ts";
 
 interface FilterProps {
     handleFilter: (query: QueryParams) => void;
