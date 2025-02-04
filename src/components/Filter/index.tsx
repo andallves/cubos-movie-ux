@@ -1,11 +1,28 @@
 import {genreService} from "../../services/genreService/genreService.ts";
 import {FormEvent, useEffect, useState} from "react";
 import {Genre} from "../../types/genre.ts";
-import {ButtonFilter, Form, FormContainer, Input, Label, Select} from "./styles.ts";
+import {ButtonFilter, Form, FormContainer} from "./styles.ts";
 import {MovieLengthEnum} from "../../enums/movieLength.ts";
-import {classificationMovies, languagesMovies, ordenacao} from "../../utils/filter-input-values.ts";
+import {
+    classificationMovies,
+    languagesMovies,
+    orderingMovies,
+    popularityMovies, ratingMovies,
+    streamingMovies
+} from "../../utils/filter-input-values.ts";
 import {QueryParams} from "../../types/queryParams.ts";
-import {ClassificationMovies, LanguageMovies, SortBy} from "../../types/filter.ts";
+import {SortBy} from "../../types/filter.ts";
+import {YearRangeSelector} from "./components/YearRangeSelector";
+import {GenreSelector} from "./components/GenreSelector";
+import {ClassificationSelector} from "./components/ClassificationSelector";
+import {RatingSelector} from "./components/RatingSelector";
+import {LengthSelector} from "./components/LengthSelector";
+import {PopularitySelector} from "./components/PopularitySelector";
+import {LanguageSelector} from "./components/LanguageSelector";
+import {SortBySelector} from "./components/SortBySelector";
+import {CountrySelector} from "./components/CountrySelector";
+import {StreamingSelector} from "./components/StreamingSelector";
+import {MemberMovieInput} from "./components/MemberMovieInput";
 
 interface FilterProps {
     handleFilter: (query: QueryParams) => void;
@@ -13,14 +30,14 @@ interface FilterProps {
 
 export const Filter = ({ handleFilter }: FilterProps) => {
     const [genres, setGenres] = useState<Genre[]>([]);
-    const [inputGenre, setInputGenre] = useState<number>(0);
+    const [inputGenre, setInputGenre] = useState<string>("");
     const [inputCertification, setInputCertification] = useState<string>("")
-    const [inputStartYear, setInputStartYear] = useState<number>(1900);
-    const [inputEndYear, setInputEndYear] = useState<number>(2025);
-    const [inputMinRating, setInputMinRating] = useState<number>(0);
-    const [inputLength, setInputLength] = useState<MovieLengthEnum>(0);
+    const [inputStartYear, setInputStartYear] = useState<string>("");
+    const [inputEndYear, setInputEndYear] = useState<string>("");
+    const [inputMinRating, setInputMinRating] = useState<string>("");
+    const [inputLength, setInputLength] = useState<MovieLengthEnum>(MovieLengthEnum.todos);
     const [inputLanguage, setInputLanguage] = useState<string>("");
-    const [inputPopularity, setInputPopularity] = useState<number>();
+    const [inputPopularity, setInputPopularity] = useState<string>("");
     const [inputDirector, setInputDirector] = useState<string>("");
     const [inputActor, setInputActor] = useState<string>("");
     const [inputStreaming, setInputStreaming] = useState<string>("");
@@ -55,133 +72,72 @@ export const Filter = ({ handleFilter }: FilterProps) => {
         handleFilter(query);
     };
 
-    const languagesOptions: LanguageMovies[] = languagesMovies;
-    const classificationOptions: ClassificationMovies[] = classificationMovies;
+    const handleYearSelectedInput = (startYear: string, endYear: string) => {
+        setInputStartYear(startYear);
+        setInputEndYear(endYear);
+    }
 
     return(
         <Form onSubmit={handleSubmit}>
             <FormContainer>
-                <Label>
-                    Gênero:
-                    <Select onSelect={(e) => setInputGenre(Number(e.currentTarget.value))}
-                            value={inputGenre}
-                            onChange={(e) => setInputGenre(Number(e.currentTarget.value))}>
-                        {genres && genres.map((genre) => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
-                    </Select>
-                </Label>
+                <GenreSelector
+                    label={'Gênero'}
+                    defaultValue={inputGenre}
+                    options={genres} handleSelectChange={setInputGenre} />
 
-                <Label>
-                    Classificação Etária:
-                    <Select
-                        value={inputCertification}
-                        onChange={(e) => setInputCertification(e.target.value)}
-                    >
-                        {classificationOptions.map((co) => <option value={co.value} key={co.value}>{co.name}</option>)}
-                    </Select>
-                </Label>
+                <ClassificationSelector
+                    label={'Classificação Etária'}
+                    defaultValue={inputCertification}
+                    options={classificationMovies} handleSelectChange={setInputCertification} />
 
-                <Label>
-                    Ano de Lançamento:
-                    <Input
-                        type="number"
-                        value={inputStartYear}
-                        onChange={(e) => setInputStartYear(Number(e.target.value))}
-                    />
-                    a
-                    <Input
-                        type="number"
-                        value={inputEndYear}
-                        onChange={(e) => setInputEndYear(Number(e.target.value))}
-                    />
-                </Label>
+                <YearRangeSelector
+                    label={'Ano de Lançamento:'}
+                    handleSelectedChange={handleYearSelectedInput} />
 
-                <Label>
-                    Avaliação Mínima:
-                    <Input
-                        type="number"
-                        value={inputMinRating}
-                        onChange={(e) => setInputMinRating(Number(e.target.value))}
-                    />
-                </Label>
+                <RatingSelector
+                    label={'Avaliação Mínima'}
+                    defaultValue={inputMinRating}
+                    options={ratingMovies} handleSelectedChange={setInputMinRating} />
 
-                <Label>
-                    Duração:
-                    <Select value={inputLength} onChange={(e) => setInputLength(Number(e.target.value))}>
-                        <option value={MovieLengthEnum.todos}>Todos</option>
-                        <option value={MovieLengthEnum.curta}>Curta (menos de 60 minutos)</option>
-                        <option value={MovieLengthEnum.media}>Média (60-120 minutos)</option>
-                        <option value={MovieLengthEnum.longa}>Longa (mais de 120 minutos)</option>
-                    </Select>
-                </Label>
+                <LengthSelector
+                    label={'Duração: '}
+                    defaultValue={inputLength}
+                    handleSelectedChange={setInputLength} />
 
-                <Label>
-                    Idioma:
-                    <Select value={inputLanguage} onChange={(e) => setInputLanguage(e.target.value)}>
-                        <option value="">Todos</option>
-                        {languagesOptions.map((language) => <option value={language.code} key={language.code}>{language.name}</option>)}
-                    </Select>
-                </Label>
+                <LanguageSelector
+                    label={'Idioma: '}
+                    defaultValue={inputLanguage}
+                    options={languagesMovies} handleSelectedChange={setInputLanguage} />
 
-                <Label>
-                    Popularidade:
-                    <Select
-                        value={inputPopularity}
-                        onChange={(e) => setInputPopularity(Number(e.target.value))}
-                    >
-                        <option value="">Todos</option>
-                        <option value="80">Alta (80+)</option>
-                        <option value="79">Baixa (menos de 80)</option>
-                    </Select>
-                </Label>
+                <PopularitySelector
+                    label={'Popularidade: '}
+                    defaultValue={inputPopularity}
+                    options={popularityMovies} handleSelectedChange={setInputPopularity} />
 
-                <Label>
-                    Diretor:
-                    <Input
-                        type="text"
-                        value={inputDirector}
-                        onChange={(e) => setInputDirector(e.target.value)}
-                    />
-                </Label>
+                <MemberMovieInput
+                    label={'Diretor'}
+                    defaultValue={inputDirector} handleSelectedChange={setInputDirector} />
 
-                <Label>
-                    Atores:
-                    <Input
-                        type="text"
-                        value={inputActor}
-                        onChange={(e) => setInputActor(e.target.value)}
-                    />
-                </Label>
+                <MemberMovieInput
+                    label={'Atores'}
+                    defaultValue={inputActor} handleSelectedChange={setInputActor} />
 
-                <Label>
-                    Plataforma de Streaming:
-                    <Select
-                        value={inputStreaming}
-                        onChange={(e) => setInputStreaming(e.target.value)}
-                    >
-                        <option value="">Todos</option>
-                        <option value="Netflix">Netflix</option>
-                        <option value="Amazon Prime">Amazon Prime</option>
-                        <option value="Disney+">Disney+</option>
-                    </Select>
-                </Label>
+                <StreamingSelector
+                    label={'Plataforma de Streaming'}
+                    defaultValue={inputStreaming}
+                    options={streamingMovies} handleSelectedChange={setInputStreaming} />
 
-                <Label>
-                    País de Origem:
-                    <Select value={inputCountry}
-                            onChange={(e) => setInputCountry(e.target.value)}>
-                        <option value="">Todos</option>
-                        {languagesOptions.map(language => <option value={language.code} key={language.code}>{language.name}</option>)}
-                    </Select>
-                </Label>
+                <CountrySelector
+                    label={'País de Origem'}
+                    defaultValue={inputCountry}
+                    options={languagesMovies} handleSelectedChange={setInputCountry} />
 
-                <Label>
-                    Ordenar por:
-                    <Select value={inputSortBy} onChange={(e) => setInputSortBy(e.target.value as SortBy)}>
-                        {ordenacao.map(order => <option value={order.code} key={order.id}>{order.name}</option>)}
-                    </Select>
-                </Label>
+                <SortBySelector
+                    label={'Ordenar por:'}
+                    defaultValue={inputSortBy}
+                    options={orderingMovies} handleSelectedChange={setInputSortBy} />
             </FormContainer>
-            <ButtonFilter $active={true} type={'submit'}>Filtrar</ButtonFilter>
+            <ButtonFilter $active={true} type={'submit'}>Aplicar Filtro</ButtonFilter>
         </Form>
     )
 }

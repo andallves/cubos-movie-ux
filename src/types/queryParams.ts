@@ -1,17 +1,18 @@
 import {MovieLengthEnum} from "../enums/movieLength.ts";
-import {SortBy} from "../services/movieFilterService/movieFilterService.ts";
+import {SortBy} from "./filter.ts";
+
 
 export type QueryParams = {
-    genre?: number,
+    genre?: string,
     region?: string,
     certification_country?: string,
     certification?: string,
-    startYear?: number,
-    endYear?: number,
-    minRating?: number,
+    startYear?: string,
+    endYear?: string,
+    minRating?: string,
     length?: MovieLengthEnum
     originalLanguage?: string,
-    popularity?: number,
+    popularity?: string,
     director?: string,
     actor?: string,
     streaming?: string,

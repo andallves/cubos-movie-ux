@@ -32,7 +32,6 @@ export const FormContainer = styled.div`
     gap: ${({ theme }) => theme.spacings.xsmall};
     
     @media (min-width: 768px) {
-        flex-direction: row;
         gap: ${({ theme }) => theme.spacings.small};
     }
     
@@ -43,6 +42,11 @@ export const Label = styled.label`
     flex-direction: column;
     align-items: flex-start;
     font-size: ${({ theme }) => theme.fonts.sizes.xsmall};
+    font-family: ${({ theme }) => theme.fonts.family.secondary};
+    
+    &.release-year:first-child:not {
+        flex-direction: row;
+    }
 `;
 
 export const Select = styled.select`
@@ -51,6 +55,14 @@ export const Select = styled.select`
     border-radius: .4rem;
     color: white;
     width: 100%;
+    
+    &:focus {
+        outline: .2rem solid #8E4EC6
+    }
+    
+    option:checked {
+        background: #8E4EC6;
+    }
 `;
 
 export const Input = styled.input`
@@ -60,17 +72,23 @@ export const Input = styled.input`
         justify-content: space-between;
         align-items: center;
         flex: 1 0 0;
-        outline: none;
+        outline: 1px solid rgb(118, 118, 118);
+        padding: .4rem;
         border: none;
+        border-radius: .4rem;
         background: ${theme.colors.gray60};
 
-        color: ${theme.colors.gray30};
+        color: ${theme.colors.white};
         text-align: start;
         font-family: ${theme.fonts.family.secondary};;
         font-size: 1.6rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+        
+        &:focus {
+            outline: .2rem solid #8E4EC6
+        }
   `}
 `;
 

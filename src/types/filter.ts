@@ -8,10 +8,24 @@ export type ClassificationMovies = {
     name: string;
 }
 
-export type OrdenacaoMovies = {
+export type OrderingMovies = {
     id: number,
     code: SortBy,
     name: string ,
 }
 
-export type SortBy = "title.asc" | "popularity.asc" | "vote_count.asc" | "primary_release_date.asc";
+export type SortBy = "title.desc" | "popularity.desc" | "vote_count.desc" | "primary_release_date.desc";
+
+export type StreamingMovies = {
+    id: string,
+    name: string,
+}
+
+export type PopularityMovies = {
+    value: string;
+    name: string;
+}
+
+export type RatingMovies = {
+    value: string;
+}
