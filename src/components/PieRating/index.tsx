@@ -1,60 +1,30 @@
-export interface PieProps {
+export type PieProps = {
     colour: string;
     percentage: number;
-}
-const cleanPercentage = (percentage: number) => {
-    const isNegativeOrNaN = !Number.isFinite(+percentage) || percentage < 0; // we can set non-numbers to 0 here
-    const isTooHigh = percentage > 100;
-    if (isNegativeOrNaN) return 0;
-    if (isTooHigh) return 100;
-    return +percentage;
+    isSmall?: boolean;
 };
 
-const Circle = ({ colour, percentage, isFill = false }: PieProps & { isFill?: boolean }) => {
-    const r = 50;
-    const circ = 2 * Math.PI * r;
-    const strokePct = ((100 - percentage) * circ) / 100; // where stroke will start, e.g. from 15% to 100%.
-    return (
-        <circle
-            r={r}
-            cx={100}
-            cy={100}
-            fill={isFill ? '#0000007F' : 'transparent'}
-            stroke={strokePct !== circ ? colour : ""} // remove colour as 0% sets full circumference
-            strokeWidth={isFill ? ".1rem" : "1rem"}
-            strokeDasharray={circ}
-            strokeDashoffset={percentage ? strokePct : 0}
-        ></circle>
-    );
-};
+const strokePct = (percentage: number) => ((100 - percentage) * 2 * Math.PI * 45) / 100;
 
-const Text = ({ colour, percentage }: PieProps) => {
+export const PieRating = ({ percentage, colour = '#FFE000' }: PieProps) => {
     return (
-        <text
-            x="50%"
-            y="50%"
-            dominantBaseline="central"
-            textAnchor="middle"
-            fontSize={"1.4rem"}
-            fill={colour}
-        >
-            {percentage.toFixed(0)}%
-        </text>
-    );
-};
+        <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="75" cy="75" r="45" fill="#0000007F"/>
 
-export const PieRating = ({ percentage, colour }: PieProps) => {
-    const pct = cleanPercentage(percentage);
-    return (
-        <svg width={200} height={200}>
-            <g transform={`rotate(230 ${"100 100"})`}>
-                <Circle colour='#0000007F' percentage={0} isFill={true}/>
-                <Circle colour="#FFFFFF44" percentage={100}/>
-                <Circle colour={colour} percentage={pct}/>
-            </g>
-            <Text colour={colour} percentage={pct}/>
+            <circle cx="75" cy="75" r="45" stroke="#555" stroke-width="7" fill="none"/>
+
+            <circle cx="75" cy="75" r="45" stroke={colour} stroke-width="7" fill="none"
+                    stroke-dasharray="282.74" stroke-dashoffset={strokePct(percentage)} stroke-linecap="round"
+                    transform="rotate(-90 75 75)"/>
+
+            <text x="47%" y="50%" fill={colour} font-size="16" fontFamily={"'Montserrat', sans-serif"}
+                  font-weight="bold"
+                  text-anchor="middle" alignment-baseline="middle"
+            >
+                {percentage}
+                <tspan fontSize="10" fill="white" x="57%" y="53%">%</tspan>
+            </text>
         </svg>
     );
 };
-
 

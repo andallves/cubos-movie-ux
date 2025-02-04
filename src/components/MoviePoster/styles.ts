@@ -30,11 +30,7 @@ export const ContainerPoster = styled.div<ImageContainerProps>`
         height: 100%;
         background: linear-gradient(180deg, rgba(204, 204, 204, 0.00) 0%, rgba(0, 0, 0, 0.63) 50%, #000 100%);
     }
-
-    &:hover {
-
-    }
-
+    
     @media (min-width: 48rem) {
         width: 18.3rem;
         height: 28.1rem;
@@ -53,8 +49,9 @@ export const RatingContainer = styled.div`
     gap: 10px;
 
     position: absolute;
-    left: 45px;
-    top: 73px;
+    left: 10%;
+    top: 16%;
+    z-index: 20;
 `;
 
 export const ContainerTitle = styled.div`
