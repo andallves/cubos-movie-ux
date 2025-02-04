@@ -18,6 +18,10 @@ export const MovieList = ({ movies, pagination, isLoading, handlePagination }: M
        handlePagination(page)
     };
 
+    const movieRating = (votesAverage: number): number => {
+        return  Math.round(votesAverage * 10);
+    };
+
     return (
     <>
         <ContainerMovieList>
@@ -32,7 +36,9 @@ export const MovieList = ({ movies, pagination, isLoading, handlePagination }: M
                     id={movie.id}
                     title={movie.title}
                     nameGenres={movie.name_genres}
-                    imageUrl={movie.poster_path}/>
+                    imageUrl={movie.poster_path}
+                    porcentRating={movieRating(movie.vote_average)}
+                />
             ))}
         </ContainerMovieList>
         <Pagination

@@ -16,7 +16,7 @@ export const movieService: IMovieService = {
         return response.data;
     },
 
-    async getMovieDetails(movieId: number): Promise<MovieDetails> {
+    async getMovieDetails(movieId: string): Promise<MovieDetails> {
         const response = await api.get<MovieDetails>(`/movie/${movieId}`);
         return response.data;
     },
