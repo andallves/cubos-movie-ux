@@ -3,10 +3,10 @@ import searchIcon from '../../assets/search-icon.svg';
 import filterIcon from '../../assets/filter-icon.svg';
 import {useState} from "react";
 import {Filter} from "../Filter";
-import {IQueryParams} from "../../services/movieFilterService/movieFilterService.ts";
+import {QueryParams} from "../../types/queryParams.ts";
 
 export interface SearchInputProps {
-    handleFilter: (query: IQueryParams) => void;
+    handleFilter: (query: QueryParams) => void;
 }
 export const SearchInput = ({ handleFilter }: SearchInputProps) => {
     const [filterFieldShow, setFilterFieldShow] = useState(true);
@@ -15,8 +15,8 @@ export const SearchInput = ({ handleFilter }: SearchInputProps) => {
         setFilterFieldShow(!filterFieldShow);
     }
 
-    const handleFiltert = (query: IQueryParams) => {
-        handleFilter(query)
+    const handleFiltert = (query: QueryParams) => {
+        handleFilter(query);
     }
     return (
         <>

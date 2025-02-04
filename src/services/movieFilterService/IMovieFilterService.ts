@@ -1,9 +1,9 @@
-import {IMovieResponse} from "../../types/movie.ts";
-import {IQueryParams} from "../../types/queryParams.ts";
+import {MovieResponse} from "../../types/movie.ts";
+import {QueryParams} from "../../types/queryParams.ts";
 
 export interface IMovieFilterService {
     searchMoviesFiltered: (
-        query: IQueryParams,
+        query: QueryParams,
         page?: number,
-    ) => Promise<IMovieResponse>;
+    ) => Promise<MovieResponse>;
 }
