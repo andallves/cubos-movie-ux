@@ -43,7 +43,7 @@ export const MovieList = ({ movies, pagination, isLoading, handlePagination }: M
         </ContainerMovieList>
         <Pagination
             currentPage={pagination?.page}
-            totalPage={pagination?.total_pages}
+            totalPages={pagination?.total_pages}
             handlePageChange={handleMoviesPagined} />
         </>
     )

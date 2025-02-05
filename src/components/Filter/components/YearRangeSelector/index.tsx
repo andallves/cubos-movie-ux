@@ -1,5 +1,6 @@
-import {Label, Select, SelectContainer} from "./styles.ts";
+import {SelectContainer} from "./styles.ts";
 import React, {useState} from "react";
+import {Label, Select} from "../../styles.ts";
 
 type YearRangeSelectorProps = {
     label: string;
@@ -20,7 +21,7 @@ export const YearRangeSelector = ({ label, handleSelectedChange }: YearRangeSele
 
     return (
         <Label>
-            <span>{label}</span>
+            {label}
 
             <SelectContainer>
                 <Select

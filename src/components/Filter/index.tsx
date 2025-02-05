@@ -146,7 +146,7 @@ export const Filter = ({ handleFilter, isLoading }: FilterProps) => {
                 type={'submit'}
             >
                 {isLoading ? (
-                    <Commet  color="#fff" />
+                    <Commet  color="rgba(183, 68, 247, 0.08)" />
                 ) : (
                     <p>Aplicar Filtro</p>
                 )}

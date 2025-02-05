@@ -24,6 +24,10 @@ export const InputContainer = styled.div`
         border-radius: 4px;
         border: 1px solid #49474E;
         background: ${theme.colors.gray50};
+
+        &:focus-within {
+            outline: 0.1rem solid #8E4EC6;
+        }
   `}
 `;
 
@@ -32,20 +36,21 @@ export const Input = styled.input`
         display: flex;
         max-width: 48.8rem;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         flex: 1 0 0;
         outline: none;
         border: none;
         background: ${theme.colors.gray60};
 
-        color: ${theme.colors.gray30};
+        color: ${theme.colors.gray10};
         text-align: start;
         font-family: ${theme.fonts.family.secondary};;
         font-size: 1.6rem;
         font-style: normal;
-        font-weight: 700;
+        font-weight: 400;
         line-height: normal;
-  `}
+        
+    `}
 `;
 
 export const ButtonSearch = styled.button`  
@@ -53,6 +58,11 @@ export const ButtonSearch = styled.button`
     align-items: center;
     background: transparent;
     cursor: pointer;
+    
+    &:hover {
+        transform: scale(1.2);
+        
+    }
 `;
 
 export const SearchIcon = styled.img`
