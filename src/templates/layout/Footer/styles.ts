@@ -4,7 +4,7 @@ export const FooterContainer = styled.footer`
     ${({ theme }) => css`
         display: flex;
         width: 100%;
-        min-width: 37.5rem;
+        min-width: 32rem;
         flex-direction: column;
         align-items: flex-start;
         padding: ${theme.spacings.xsmall};

@@ -7,8 +7,9 @@ interface ImageContainerProps {
 export const ContainerPoster = styled.div<ImageContainerProps>`
     position: relative;
     display: flex;
-    width: 16.3rem;
-    height: 27.1rem;
+    width: 100%;
+    max-width: 25rem;
+    height: 50vh;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
@@ -30,8 +31,7 @@ export const ContainerPoster = styled.div<ImageContainerProps>`
         height: 100%;
         background: linear-gradient(180deg, rgba(204, 204, 204, 0.00) 0%, rgba(0, 0, 0, 0.63) 50%, #000 100%);
     }
-    
-    @media (min-width: 48rem) {
+    @media (min-width: 370px) {
         width: 18.3rem;
         height: 28.1rem;
     }

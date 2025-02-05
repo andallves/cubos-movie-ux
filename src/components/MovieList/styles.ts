@@ -3,11 +3,11 @@ import styled, {css} from "styled-components";
 export const ContainerMovieList = styled.div`
     ${({ theme }) => css`
         display: flex;
-        min-width: 37.3rem;
+        min-width: 32rem;
         padding: ${theme.spacings.xsmall};
         justify-content: center;
         align-items: center;
-        align-content: center;
+        align-content: flex-start;
         gap: 1.6rem;
         flex-wrap: wrap;
 
@@ -16,9 +16,10 @@ export const ContainerMovieList = styled.div`
 
         backdrop-filter: blur(2px);
 
-        @media (min-width: 48rem) {
+        @media (min-width: 480px) {
             padding: 2.4rem;
             margin: 1.6rem;
+            justify-content: space-between;
         }
     `}
 `;
