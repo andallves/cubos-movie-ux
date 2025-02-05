@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {MovieDetails as MovieDetailsType} from "../../types/movie.ts";
 import {useEffect, useState} from "react";
-import {movieService} from "../../services/movieQueryService/movieService.ts";
+import {movieQueryService} from "../../services/movieQueryService/movieQueryService.ts";
 import {
     GenreContainer, GenreTag, GenreTagContainer, GenreText, GenreTitle, InfoBox, InfoContainer, InfoText, InfoTitle,
     MovieDetailsContainer, MovieHeaderContainer,
@@ -26,7 +26,7 @@ export const MovieDetails = () => {
         const fetchMovieDetails = async () => {
             try {
                 if (!id) return;
-                const response = await movieService.getMovieDetails(id);
+                const response = await movieQueryService.getMovieDetails(id);
                 setMovie(response);
             } catch (error) {
                 console.error("Erro ao buscar detalhes do filme:", error);

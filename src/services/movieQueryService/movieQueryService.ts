@@ -1,8 +1,8 @@
 import {MovieDetails, MovieResponse} from "../../types/movie.ts";
 import {api} from "../../utils/api.ts";
-import {IMovieService} from "./IMovieService.ts";
+import {IMovieQueryService} from "./IMovieQueryService.ts";
 
-export const movieService: IMovieService = {
+export const movieQueryService: IMovieQueryService = {
 
     async getMovies(page = 1): Promise<MovieResponse> {
         const response = await api.get<MovieResponse>(`/movie/popular`, { params: { page } });
