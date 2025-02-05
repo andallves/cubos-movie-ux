@@ -7,20 +7,23 @@ interface ImageContainerProps {
 export const ContainerPoster = styled.div<ImageContainerProps>`
     position: relative;
     display: flex;
-    width: 100%;
+    width: 40vw;
+    min-width: 14rem;
     max-width: 25rem;
-    height: 50vh;
+    height: 35vh;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     flex-shrink: 0;
-    transition: all 5s ease-in-out;
     cursor: pointer;
-
     border-radius: .4rem;
 
     background: url(${({ $imageUrl }) => ($imageUrl)}) lightgray 0 0 / 100% 100% no-repeat;
     box-shadow: 0 .1rem .5rem 0 rgba(0, 0, 0, 0.20);
+    
+    &:hover {
+        justify-content: space-between;
+    }
 
     &::before {
         content: '';
@@ -31,27 +34,38 @@ export const ContainerPoster = styled.div<ImageContainerProps>`
         height: 100%;
         background: linear-gradient(180deg, rgba(204, 204, 204, 0.00) 0%, rgba(0, 0, 0, 0.63) 50%, #000 100%);
     }
-    @media (min-width: 370px) {
-        width: 18.3rem;
-        height: 28.1rem;
+    @media (min-width: 598px) {
+        width: 16rem;
+        height: 40vh;
     }
 
-    @media (min-width: 102.4rem) {
-        width: 23.5rem;
-        height: 33.5rem;
+    @media (min-width: 678px) {
+        width: 20rem;
+        height: 50vh;
+    }
+
+    @media (min-width: 1000px) {
+        width: 16vw;
+        height: 45vh;
         color: rgba(0,0,0, 0.50)
     }
 `;
 
 export const RatingContainer = styled.div`
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 10px;
-
-    position: absolute;
-    left: 10%;
-    top: 16%;
+    margin: 0 auto;
     z-index: 20;
+
+    @media (min-width: 598px) {
+        margin: 2rem auto 0 auto;
+    }
+
+    @media (min-width: 678px) {
+        margin: 5rem auto 0 auto;
+    }
 `;
 
 export const ContainerTitle = styled.div`
