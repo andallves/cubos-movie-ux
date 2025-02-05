@@ -21,7 +21,7 @@ export const MovieDetailsContainer = styled.div<{ $imageUrl: string }>`
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(204, 204, 204, 0.00) 0%, rgba(0, 0, 0, 0.73) 30%, #000 100%);
+            background: linear-gradient(90deg, #121113 0%, rgba(18, 17, 19, 0.80) 50%, rgba(18, 17, 19, 0.00) 100%);
         }
     }
 `;
@@ -34,6 +34,7 @@ export const MoviePosterContainer = styled.img`
 `;
 
 export const MoviesInfoContainer = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
@@ -53,7 +54,9 @@ export const MovieHeaderContainer = styled.div`
 
 export const MoviesInfoDivContainer = styled.div`
     display: flex;
+    width: 100%;
     flex-direction: column;
+    justify-content: center;
     gap: 1.6rem;
     
     @media (min-width: 1124px) {
@@ -66,6 +69,7 @@ export const MoviesInfoDiv = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
+    width: 100%;
 `;
 
 export const TitleContainer = styled.div`
@@ -108,17 +112,17 @@ export const MovieSlogan = styled.span`
 
 export const RatingContainer = styled.div`
     display: flex;
-    align-items: center;
     gap: 1.6rem;
+    align-items: center;
 `
 
 export const RatingBox = styled.div`
     display: flex;
     height: 70px;
-    padding: 16px;
+    padding: 1.6rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: .8rem;
 
     border-radius: 4px;
     background: rgba(35, 34, 37, 0.75);
@@ -136,7 +140,7 @@ export const RatingText = styled.span`
     text-transform: uppercase;
 `;
 export const RatingNumbers = styled.span`
-    align-self: stretch;
+    align-items: stretch;
     
     color: #FFF;
     font-family:  ${({ theme }) => theme.fonts.family.default};
@@ -172,13 +176,13 @@ export const OverviewText = styled.span`
 `;
 
 export const Overview = styled.p`
-    align-self: stretch;
     color: #EEEEF0;
     font-family: ${({ theme }) => theme.fonts.family.default};
-    font-size: 16px;
+    font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    text-align: justify;
 `;
 
 export const GenreContainer = styled.div`
@@ -230,6 +234,7 @@ export const GenreText = styled.p`
 
 export const InfoContainer = styled.div`
     display: flex;
+    width: 100%;
     justify-content: flex-start;
     gap: 1.6rem;
 `;
@@ -260,6 +265,11 @@ export const InfoText = styled.p`
     color: #EEEEF0;
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: normal;
+`;
+
+export const VideoContainer = styled.div`
+    width: 100%;
+    padding: 0 5rem;
 `;

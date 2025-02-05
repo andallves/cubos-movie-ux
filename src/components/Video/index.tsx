@@ -19,8 +19,8 @@ export const YouTubeVideo = ({ id }: YouTubeVideoProps) => {
     })
     return (
         <iframe
-            width="1200"
-            height="680"
+            width="100%"
+            height="450"
             src={`https://www.youtube.com/embed/${video?.key}`}
             title="YouTube Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

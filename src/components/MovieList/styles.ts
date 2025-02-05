@@ -10,9 +10,11 @@ export const ContainerMovieList = styled.div`
         align-content: center;
         gap: 1.6rem;
         flex-wrap: wrap;
-        
-        border-radius: .4rem;
-        background: #232225;
+
+        border-radius: 4px;
+        background: rgba(235, 234, 248, 0.08);
+
+        backdrop-filter: blur(2px);
 
         @media (min-width: 48rem) {
             padding: 2.4rem;

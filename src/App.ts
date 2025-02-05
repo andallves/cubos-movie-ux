@@ -2,15 +2,11 @@ import styled from 'styled-components';
 import backgroundImage from './assets/backgropund-krists-luhaers-unsplash.png';
 
 export const BackgroundContainer = styled.div`
+    box-sizing: border-box;
     position: relative;
-    width: 100%;
-    height: 100%; 
-    background-color: black;
-    background-image: url(${backgroundImage});
-    background-size: auto;
-    background-position: center;
+    background: lightgray url(${backgroundImage}) no-repeat fixed 0;
     z-index: 10;
-    
+
     &::before {
         content: '';
         position: absolute;
@@ -18,7 +14,7 @@ export const BackgroundContainer = styled.div`
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Preto com opacidade 0.2 */
+        background: linear-gradient(180deg, rgba(26, 26, 26, 0.7) 0%, #121113 50%, #121113 100%);
     }
 `;
 

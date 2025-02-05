@@ -7,7 +7,9 @@ export const NavbarContainer = styled.nav`
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-    border-bottom: .1rem solid rgba(241, 230, 253, 0.19);
+    border-bottom: 1px solid rgba(241, 230, 253, 0.19);
+    background: rgba(18, 17, 19, 0.50);
+    backdrop-filter: blur(2px);
   `}
 `;
 

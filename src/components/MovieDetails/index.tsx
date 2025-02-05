@@ -9,7 +9,7 @@ import {
     MoviesInfoContainer, MoviesInfoDiv, MoviesInfoDivContainer, MovieSlogan,
     OriginalTitle, Overview, OverviewContainer, OverviewText, RatingBox, RatingContainer, RatingNumbers, RatingText,
     Title,
-    TitleContainer
+    TitleContainer, VideoContainer
 } from "./styles.ts";
 import {PieRating} from "../PieRating";
 import {languagesMovies} from "../../utils/filter-input-values.ts";
@@ -119,7 +119,7 @@ export const MovieDetails = () => {
                                 <RatingText>Votos</RatingText>
                                 <RatingNumbers>{movie.vote_count}</RatingNumbers>
                             </RatingBox>
-                            <PieRating colour={'yellow'} percentage={movieRating(movie.vote_average)}/>
+                            <PieRating colour={'yellow'} percentage={movieRating(movie.vote_average)} isSmall={true} />
                         </RatingContainer>
                     </MovieHeaderContainer>
                     <MoviesInfoDivContainer>
@@ -178,9 +178,9 @@ export const MovieDetails = () => {
                     </MoviesInfoDivContainer>
                 </MoviesInfoContainer>
             </MovieDetailsContainer>
-            <div>
+            <VideoContainer>
                 <YouTubeVideo id={movie.id} />
-            </div>
+            </VideoContainer>
         </>
     );
 }

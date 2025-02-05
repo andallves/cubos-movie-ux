@@ -19,7 +19,6 @@ function App() {
 
     const fetchData = async () => {
         setIsLoading(true)
-
         try {
             const movies = await movieService.getMovies(pagination.page);
             setMovies(movies.results);
@@ -48,7 +47,6 @@ function App() {
         } finally {
             setIsLoading(false);
         }
-
     }
 
     const handlePagination = (page: number) => {
@@ -57,18 +55,21 @@ function App() {
 
     const moviesWithGenres = mapMovieWithGenre(movies, genres);
 
-  return (
-      <>
-        <SearchInput
-            isLoading={isLoading}
-            handleFilter={handleFiltedSearch} />
-        <MovieList
-            movies={moviesWithGenres}
-            pagination={pagination}
-            handlePagination={handlePagination}
-            isLoading={isLoading} />
+    return (
+        <>
+            <SearchInput
+                isLoading={isLoading}
+                handleFilter={handleFiltedSearch}
+            />
+
+            <MovieList
+                movies={moviesWithGenres}
+                pagination={pagination}
+                handlePagination={handlePagination}
+                isLoading={isLoading}
+            />
         </>
-  )
+    )
 }
 
 export default App
