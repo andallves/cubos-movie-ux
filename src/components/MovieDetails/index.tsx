@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {MovieDetails as MovieDetailsType} from "../../types/movie.ts";
+import {MovieDetailsFormatted} from "../../types/movie.ts";
 import {useEffect, useState} from "react";
 import {movieQueryService} from "../../services/movieQueryService/movieQueryService.ts";
 import {
@@ -7,19 +7,22 @@ import {
     MovieDetailsContainer, MovieHeaderContainer,
     MoviePosterContainer,
     MoviesInfoContainer, MoviesInfoDiv, MoviesInfoDivContainer, MovieSlogan,
-    OriginalTitle, Overview, OverviewContainer, OverviewText, RatingBox, RatingContainer, RatingNumbers, RatingText,
+    OriginalTitle, Overview, OverviewContainer, OverviewText, RatingContainer,
     Title,
     TitleContainer, VideoContainer
 } from "./styles.ts";
 import {PieRating} from "../PieRating";
-import {languagesMovies} from "../../utils/filter-input-values.ts";
 import {YouTubeVideo} from "../Video";
+import {movieCustomDataService} from "../../services/movieCustomDataService/movieCustomDataService.ts";
 
+const BASE_URL =  'https://image.tmdb.org/t/p';
 
 export const MovieDetails = () => {
     const { id } = useParams<{ id: string }>(); // Obtém o ID da URL
-    const [movie, setMovie] = useState<MovieDetailsType | null>(null);
+    const [movie, setMovie] = useState<MovieDetailsFormatted | null>(null);
     const [loading, setLoading] = useState(true);
+
+    const profit = (revenue: number, budget: number): number => revenue - budget;
 
     useEffect(() => {
         setLoading(true);
@@ -27,7 +30,20 @@ export const MovieDetails = () => {
             try {
                 if (!id) return;
                 const response = await movieQueryService.getMovieDetails(id);
-                setMovie(response);
+
+                if (!response) return;
+                const movieData: MovieDetailsFormatted = {
+                    ...response,
+                    vote_porcent: movieCustomDataService.formatPorcentageMovieRating(response.vote_average),
+                    release_date: movieCustomDataService.formatData(response.release_date),
+                    runtime: movieCustomDataService.formatTime(response.runtime),
+                    original_language: movieCustomDataService.formatCountryCodeToName(response.original_language),
+                    status: movieCustomDataService.formatStatusToPortugues(response.status),
+                    budget: movieCustomDataService.formatNumber(response.budget),
+                    revenue: movieCustomDataService.formatNumber(response.revenue),
+                    profit: movieCustomDataService.formatNumber(profit(response.revenue, response.budget))};
+
+                setMovie(movieData);
             } catch (error) {
                 console.error("Erro ao buscar detalhes do filme:", error);
             } finally {
@@ -41,64 +57,6 @@ export const MovieDetails = () => {
     if (loading) return <p>Carregando...</p>;
     if (!movie) return <p>Filme não encontrado.</p>;
 
-    const profit = movie.revenue - movie.budget;
-
-    const formatarData = (data: string): string => {
-        const [ano, mes, dia] = data.split("-");
-        return `${dia}/${mes}/${ano}`;
-    }
-
-    function formatarTempo(minutos: number): string {
-        // Calcula as horas e os minutos restantes
-        const horas = Math.floor(minutos / 60);
-        const minutosRestantes = minutos % 60;
-
-        // Formata a string com horas e minutos
-        if (horas > 0) {
-            return `${horas}h ${minutosRestantes.toString().padStart(2, '0')}m`;
-        } else {
-            return `${minutosRestantes}m`;
-        }
-    }
-
-    const getCountryName = (code: string) => {
-        const languageMovie = languagesMovies.find((language) => language.code === code);
-        return languageMovie?.name;
-    }
-
-    function formatarNumero(numero: number): string {
-        if (numero >= 1e6) {
-            // Converte para milhões (M)
-            return `${(numero / 1e6).toFixed(2)}M`;
-        } else if (numero >= 1e3) {
-            // Converte para milhares (K)
-            return `${(numero / 1e3).toFixed(2)}K`;
-        } else {
-            // Mantém o número original
-            return numero.toString();
-        }
-    }
-
-    function traduzirStatus(status: string): string {
-        const statusTraduzidos: Record<string, string> = {
-            "Released": "Lançado",
-            "Post Production": "Pós-produção",
-            "In Production": "Em produção",
-            "Planned": "Planejado",
-            "Rumored": "Rumor",
-            "Canceled": "Cancelado",
-        };
-
-        // Retorna a tradução ou o status original se não for encontrado
-        return statusTraduzidos[status] || status;
-    }
-
-    const movieRating = (votesAverage: number): number => {
-        return  Math.round(votesAverage * 10);
-    };
-
-    const BASE_URL =  'https://image.tmdb.org/t/p';
-
     return (
         <>
             <MovieDetailsContainer $imageUrl={`${BASE_URL}/w1280${movie.backdrop_path}`} className="movie-detail">
@@ -111,15 +69,15 @@ export const MovieDetails = () => {
                             <MovieSlogan>{movie.tagline}</MovieSlogan>
                         </TitleContainer>
                         <RatingContainer>
-                            <RatingBox>
-                                <RatingText>Popularidade</RatingText>
-                                <RatingNumbers>{movie.popularity}</RatingNumbers>
-                            </RatingBox>
-                            <RatingBox>
-                                <RatingText>Votos</RatingText>
-                                <RatingNumbers>{movie.vote_count}</RatingNumbers>
-                            </RatingBox>
-                            <PieRating colour={'yellow'} percentage={movieRating(movie.vote_average)} isSmall={true} />
+                            <InfoBox>
+                                <InfoTitle>Popularidade</InfoTitle>
+                                <InfoText>{movie.popularity}</InfoText>
+                            </InfoBox>
+                            <InfoBox>
+                                <InfoTitle>Votos</InfoTitle>
+                                <InfoText>{movie.vote_count}</InfoText>
+                            </InfoBox>
+                            <PieRating colour={'yellow'} percentage={movie.vote_porcent} isSmall={true} />
                         </RatingContainer>
                     </MovieHeaderContainer>
                     <MoviesInfoDivContainer>
@@ -143,35 +101,35 @@ export const MovieDetails = () => {
                             <InfoContainer>
                                 <InfoBox>
                                     <InfoTitle>Lançamento</InfoTitle>
-                                    <InfoText>{formatarData(movie.release_date)}</InfoText>
+                                    <InfoText>{movie.release_date}</InfoText>
                                 </InfoBox>
                                 <InfoBox>
                                     <InfoTitle>Duração</InfoTitle>
-                                    <InfoText>{formatarTempo(movie.runtime)}</InfoText>
+                                    <InfoText>{movie.runtime}</InfoText>
                                 </InfoBox>
                             </InfoContainer>
                             <InfoContainer>
                                 <InfoBox>
                                     <InfoTitle>Situação</InfoTitle>
-                                    <InfoText>{traduzirStatus(movie.status)}</InfoText>
+                                    <InfoText>{movie.status}</InfoText>
                                 </InfoBox>
                                 <InfoBox>
                                     <InfoTitle>Idioma</InfoTitle>
-                                    <InfoText>{getCountryName(movie.original_language)}</InfoText>
+                                    <InfoText>{movie.original_language}</InfoText>
                                 </InfoBox>
                             </InfoContainer>
                             <InfoContainer>
                                 <InfoBox>
                                     <InfoTitle>Orçamento</InfoTitle>
-                                    <InfoText>${formatarNumero(movie.budget)}</InfoText>
+                                    <InfoText>{movie.budget}</InfoText>
                                 </InfoBox>
                                 <InfoBox>
                                     <InfoTitle>Receita</InfoTitle>
-                                    <InfoText>${formatarNumero(movie.revenue)}</InfoText>
+                                    <InfoText>{movie.revenue}</InfoText>
                                 </InfoBox>
                                 <InfoBox>
                                     <InfoTitle>Lucro</InfoTitle>
-                                    <InfoText>${formatarNumero(profit)}</InfoText>
+                                    <InfoText>{movie.profit}</InfoText>
                                 </InfoBox>
                             </InfoContainer>
                         </MoviesInfoDiv>
@@ -179,6 +137,8 @@ export const MovieDetails = () => {
                 </MoviesInfoContainer>
             </MovieDetailsContainer>
             <VideoContainer>
+
+                <h2>Trailer</h2>
                 <YouTubeVideo id={movie.id} />
             </VideoContainer>
         </>

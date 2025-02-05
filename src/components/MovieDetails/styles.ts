@@ -8,7 +8,7 @@ export const MovieDetailsContainer = styled.div<{ $imageUrl: string }>`
     flex-direction: column;
     gap: 3.2rem;
     
-    @media (min-width: 768px) {
+    @media (min-width: 967px) {
         flex-direction: row;
         padding: 2.4rem;
         margin:2.4rem;
@@ -28,9 +28,14 @@ export const MovieDetailsContainer = styled.div<{ $imageUrl: string }>`
 
 export const MoviePosterContainer = styled.img`
     width: 100%;
-    max-width: 35.4rem;
+    margin: 0 auto;
+    max-width: 45.4rem;
     height: 100%;
     z-index: 20;
+    
+    @media(min-width: 96.7rem) {
+        max-width: 35.4rem;
+    }
 `;
 
 export const MoviesInfoContainer = styled.div`
@@ -46,7 +51,7 @@ export const MovieHeaderContainer = styled.div`
     flex-direction: column;
     gap: 1.6rem;
     
-    @media (min-width: 1124px) {
+    @media (min-width: 1324px) {
         flex-direction: row;
         justify-content: space-between;
     }
@@ -59,7 +64,7 @@ export const MoviesInfoDivContainer = styled.div`
     justify-content: center;
     gap: 1.6rem;
     
-    @media (min-width: 1124px) {
+    @media (min-width: 1324px) {
         flex-direction: row;
         justify-content: space-between;
     }
@@ -74,6 +79,7 @@ export const MoviesInfoDiv = styled.div`
 
 export const TitleContainer = styled.div`
     display: flex;
+    width: 100%;
     height: 98px;
     flex-direction: column;
     align-items: flex-start;
@@ -116,45 +122,10 @@ export const RatingContainer = styled.div`
     align-items: center;
 `
 
-export const RatingBox = styled.div`
-    display: flex;
-    height: 70px;
-    padding: 1.6rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: .8rem;
-
-    border-radius: 4px;
-    background: rgba(35, 34, 37, 0.75);
-
-    backdrop-filter: blur(2px);
-`;
-
-export const RatingText = styled.span`
-    color: #B5B2BC;
-    font-family: ${({ theme }) => theme.fonts.family.default};
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-transform: uppercase;
-`;
-export const RatingNumbers = styled.span`
-    align-items: stretch;
-    
-    color: #FFF;
-    font-family:  ${({ theme }) => theme.fonts.family.default};
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 100%; /* 14px */
-    text-transform: uppercase;
-`;
-
 export const OverviewContainer = styled.div`
     display: flex;
     padding: 16px;
-    max-width: 44rem;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
@@ -215,21 +186,31 @@ export const GenreTag = styled.div`
     display: flex;
     padding: 8px;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
 
     border-radius: 2px;
     background: rgba(193, 80, 255, 0.18);
     backdrop-filter: blur(2px);
+    transition: all .4s ease;
+    
+    @media (min-width: 467px) {
+        gap: .8rem;
+    }
 `;
 
 export const GenreText = styled.p`
     color: #ECD9FA;
     font-family:  ${({ theme }) => theme.fonts.family.default};
-    font-size: 12px;
+    font-size: .8rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-transform: uppercase;
+    transition: all .4s ease;
+
+    @media (min-width: 467px) {
+        font-size: 1.2rem;
+    }
 `;
 
 export const InfoContainer = styled.div`
@@ -271,5 +252,14 @@ export const InfoText = styled.p`
 
 export const VideoContainer = styled.div`
     width: 100%;
-    padding: 0 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3rem;
+    gap: 1.6rem;
+    
+    @media (min-width: 76.8rem) {
+        gap: 2.4rem;
+        padding: 5rem;
+    }
 `;

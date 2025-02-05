@@ -80,12 +80,15 @@ function App() {
                 handleFilter={handleFiltedMovies}
             />
 
-            <MovieList
+            {!moviesWithGenres ? (
+                <span> Nenhum filme encontrado. </span>
+            ) : (
+                <MovieList
                 movies={moviesWithGenres}
                 pagination={pagination}
                 handlePagination={handlePagination}
-                isLoading={isLoading}
-            />
+                isLoading={isLoading}/>
+            )}
         </>
     )
 }

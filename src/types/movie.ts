@@ -14,6 +14,7 @@ export type Movie = {
     name_genres: string[];
     vote_count: number;
     popularity: number;
+    profit: number
 }
 
 export type MovieResponse = {
@@ -26,8 +27,20 @@ export type MovieResponse = {
 export type MovieDetails = Movie & {
     budget: number;
     revenue: number;
-    runtime: number;
     genres: Genre[];
     status: string;
     tagline: string;
+    runtime: number;
 }
+
+export type MovieDetailsFormatted = Omit<
+    MovieDetails,
+    'runtime' | 'status' | 'budget' | 'revenue' | 'profit'
+> & {
+    vote_porcent: number;
+    runtime: string;
+    status: string;
+    budget: string;
+    revenue: string;
+    profit: string;
+};
