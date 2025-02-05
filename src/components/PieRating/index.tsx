@@ -1,4 +1,4 @@
-export type PieProps = {
+type PieProps = {
     colour: string;
     percentage: number;
     isSmall?: boolean;
