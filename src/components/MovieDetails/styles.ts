@@ -220,15 +220,15 @@ export const InfoContainer = styled.div`
     gap: 1.6rem;
 `;
 
-export const InfoBox = styled.div`
+export const InfoBox = styled.div<{ isIcon?: boolean }>`
     display: flex;
     width: 100%;
-    padding: 16px;
+    padding: ${({ isIcon }) => isIcon ? 0 : '1.6rem'};
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
     border-radius: 4px;
-    background: rgba(35, 34, 37, 0.75);
+    background: ${({ isIcon }) => isIcon ? 'transparent' : 'rgba(35, 34, 37, 0.75)'};
     backdrop-filter: blur(2px);
 `;
 

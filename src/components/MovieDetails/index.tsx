@@ -14,18 +14,20 @@ import {
 import {PieRating} from "../PieRating";
 import {YouTubeVideo} from "../Video";
 import {movieCustomDataService} from "../../services/movieCustomDataService/movieCustomDataService.ts";
+import {Commet} from "react-loading-indicators";
+import {ContainerLoading} from "../MovieList/styles.ts";
 
 const BASE_URL =  'https://image.tmdb.org/t/p';
 
 export const MovieDetails = () => {
     const { id } = useParams<{ id: string }>(); // Obtém o ID da URL
     const [movie, setMovie] = useState<MovieDetailsFormatted | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const profit = (revenue: number, budget: number): number => revenue - budget;
 
     useEffect(() => {
-        setLoading(true);
+        setIsLoading(true);
         const fetchMovieDetails = async () => {
             try {
                 if (!id) return;
@@ -47,14 +49,19 @@ export const MovieDetails = () => {
             } catch (error) {
                 console.error("Erro ao buscar detalhes do filme:", error);
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
         };
-
-        fetchMovieDetails();
+        fetchMovieDetails()
+            .then();
     }, [id]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (isLoading) return (
+        <ContainerLoading>
+            <Commet  color="#8E4EC6" size="large" text={"Carregando..."} />
+        </ContainerLoading>
+    );
+
     if (!movie) return <p>Filme não encontrado.</p>;
 
     return (
@@ -77,7 +84,10 @@ export const MovieDetails = () => {
                                 <InfoTitle>Votos</InfoTitle>
                                 <InfoText>{movie.vote_count}</InfoText>
                             </InfoBox>
+                            <InfoBox isIcon={true}>
                             <PieRating colour={'yellow'} percentage={movie.vote_porcent} isSmall={true} />
+
+                            </InfoBox>
                         </RatingContainer>
                     </MovieHeaderContainer>
                     <MoviesInfoDivContainer>
@@ -137,7 +147,6 @@ export const MovieDetails = () => {
                 </MoviesInfoContainer>
             </MovieDetailsContainer>
             <VideoContainer>
-
                 <h2>Trailer</h2>
                 <YouTubeVideo id={movie.id} />
             </VideoContainer>

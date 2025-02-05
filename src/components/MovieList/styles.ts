@@ -24,7 +24,14 @@ export const ContainerMovieList = styled.div`
 `;
 
 export const ContainerLoading = styled.div`
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    height: 30rem;
+    height: 60vh;
+    margin: 0 auto;
+    
+    @media (min-width: 48rem) {
+        height: 80vh;
+    }
 `;

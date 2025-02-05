@@ -27,7 +27,7 @@ export const MovieList = ({ movies, pagination, isLoading, handlePagination }: M
         <ContainerMovieList>
             {isLoading ? (
                 <ContainerLoading>
-                    <Commet  color="#8E4EC6" size="medium"  />
+                    <Commet  color="#8E4EC6" size="medium" text={"Carregando..."} />
 
                 </ContainerLoading>
             ) : (movies.map((movie: Movie) =>
