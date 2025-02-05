@@ -13,6 +13,7 @@ import {
 } from "./styles.ts";
 import {PieRating} from "../PieRating";
 import {languagesMovies} from "../../utils/filter-input-values.ts";
+import {YouTubeVideo} from "../Video";
 
 
 export const MovieDetails = () => {
@@ -178,7 +179,7 @@ export const MovieDetails = () => {
                 </MoviesInfoContainer>
             </MovieDetailsContainer>
             <div>
-                Trailler
+                <YouTubeVideo id={movie.id} />
             </div>
         </>
     );

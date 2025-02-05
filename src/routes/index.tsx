@@ -4,12 +4,14 @@ import {MovieDetails} from "../components/MovieDetails";
 import {Navbar} from "../templates/layout/Navbar";
 import {Footer} from "../templates/layout/Footer";
 import {BackgroundContainer, Content} from "../App.ts";
+import {Background} from "../components/Background";
 
 export const AppRoutes = () => {
 	
 	return (
 		<BrowserRouter>
 			<BackgroundContainer>
+				<Background />
 				<Content>
 					<Navbar />
 					<Routes>
