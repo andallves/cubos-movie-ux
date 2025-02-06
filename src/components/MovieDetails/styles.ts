@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MovieDetailsContainer = styled.div<{ $imageUrl: string }>`
+export const MovieDetailsContainer = styled.main<{ $imageUrl: string }>`
     position: relative;
     padding: 1.6rem;
     margin: 1.6rem;

@@ -1,12 +1,4 @@
-export type LanguageMovies = {
-    code: string;
-    name: string;
-}
-
-export type ClassificationMovies = {
-    value: string;
-    name: string;
-}
+import {Genre} from "./genre.ts";
 
 export type OrderingMovies = {
     id: number,
@@ -16,16 +8,8 @@ export type OrderingMovies = {
 
 export type SortBy = "title.desc" | "popularity.desc" | "vote_count.desc" | "primary_release_date.desc";
 
-export type StreamingMovies = {
-    id: string,
-    name: string,
-}
-
-export type PopularityMovies = {
-    value: string;
+export type SelectorValuesOptions = OrderingMovies | Genre | {
+    id: number | string;
     name: string;
-}
-
-export type RatingMovies = {
-    value: string;
-}
+    code?: string;
+};

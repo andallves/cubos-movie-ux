@@ -13,17 +13,11 @@ import {
 import {QueryParams} from "../../types/queryParams.ts";
 import {SortBy} from "../../types/filter.ts";
 import {YearRangeSelector} from "./components/YearRangeSelector";
-import {GenreSelector} from "./components/GenreSelector";
-import {ClassificationSelector} from "./components/ClassificationSelector";
-import {RatingSelector} from "./components/RatingSelector";
 import {LengthSelector} from "./components/LengthSelector";
-import {PopularitySelector} from "./components/PopularitySelector";
-import {LanguageSelector} from "./components/LanguageSelector";
-import {SortBySelector} from "./components/SortBySelector";
-import {CountrySelector} from "./components/CountrySelector";
-import {StreamingSelector} from "./components/StreamingSelector";
+import {Selector} from "./components/Selector";
 import {MemberMovieInput} from "./components/MemberMovieInput";
 import {Commet} from "react-loading-indicators";
+import {SortBySelector} from "./components/SortBySelector";
 
 interface FilterProps {
     handleFilter: (query: QueryParams) => void;
@@ -82,62 +76,83 @@ export const Filter = ({ handleFilter, isLoading }: FilterProps) => {
     return(
         <Form onSubmit={handleSubmit}>
             <FormContainer>
-                <GenreSelector
+                <Selector
                     label={'Gênero'}
                     defaultValue={inputGenre}
-                    options={genres} handleSelectChange={setInputGenre} />
+                    options={genres}
+                    placeholder={'Selecione o gênero'}
+                    handleSelectedChange={setInputGenre} />
 
-                <ClassificationSelector
+                <Selector
                     label={'Classificação Etária'}
                     defaultValue={inputCertification}
-                    options={classificationMovies} handleSelectChange={setInputCertification} />
+                    options={classificationMovies}
+                    placeholder={'Selecione uma classificação'}
+                    handleSelectedChange={setInputCertification} />
 
                 <YearRangeSelector
                     label={'Ano de Lançamento:'}
                     handleSelectedChange={handleYearSelectedInput} />
 
-                <RatingSelector
+                <Selector
                     label={'Avaliação Mínima'}
                     defaultValue={inputMinRating}
-                    options={ratingMovies} handleSelectedChange={setInputMinRating} />
+                    options={ratingMovies}
+                    placeholder={'Selecione a avaliação'}
+                    handleSelectedChange={setInputMinRating} />
 
                 <LengthSelector
                     label={'Duração: '}
                     defaultValue={inputLength}
                     handleSelectedChange={setInputLength} />
 
-                <LanguageSelector
+                <Selector
                     label={'Idioma: '}
                     defaultValue={inputLanguage}
-                    options={languagesMovies} handleSelectedChange={setInputLanguage} />
+                    options={languagesMovies}
+                    placeholder={'Todos'}
+                    handleSelectedChange={setInputLanguage} />
 
-                <PopularitySelector
+                <Selector
                     label={'Popularidade: '}
                     defaultValue={inputPopularity}
-                    options={popularityMovies} handleSelectedChange={setInputPopularity} />
+                    options={popularityMovies}
+                    placeholder={'Todos'}
+                    handleSelectedChange={setInputPopularity} />
 
                 <MemberMovieInput
                     label={'Diretor'}
-                    defaultValue={inputDirector} handleSelectedChange={setInputDirector} />
+                    defaultValue={inputDirector}
+                    handleSelectedChange={setInputDirector}
+                    placeholder={'Informe um diretor'}
+                />
 
                 <MemberMovieInput
                     label={'Atores'}
-                    defaultValue={inputActor} handleSelectedChange={setInputActor} />
+                    defaultValue={inputActor}
+                    handleSelectedChange={setInputActor}
+                    placeholder={'Informe um ator'}
+                />
 
-                <StreamingSelector
+                <Selector
                     label={'Plataforma de Streaming'}
                     defaultValue={inputStreaming}
-                    options={streamingMovies} handleSelectedChange={setInputStreaming} />
+                    options={streamingMovies}
+                    placeholder={'Todos'}
+                    handleSelectedChange={setInputStreaming} />
 
-                <CountrySelector
+                <Selector
                     label={'País de Origem'}
                     defaultValue={inputCountry}
-                    options={languagesMovies} handleSelectedChange={setInputCountry} />
+                    options={languagesMovies}
+                    placeholder={'Todos'}
+                    handleSelectedChange={setInputCountry} />
 
                 <SortBySelector
-                    label={'Ordenar por:'}
+                    label={'Ordenar por'}
                     defaultValue={inputSortBy}
-                    options={orderingMovies} handleSelectedChange={setInputSortBy} />
+                    options={orderingMovies} 
+                    handleSelectedChange={setInputSortBy} />
             </FormContainer>
 
             <ButtonFilter

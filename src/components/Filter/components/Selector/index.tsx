@@ -1,33 +1,34 @@
 import React, {useState} from "react";
-import {SelectorValuesOptions, SortBy} from "../../../../types/filter.ts";
+import {SelectorValuesOptions} from "../../../../types/filter.ts";
 import {Label, Select} from "../../styles.ts";
 
-type SortBySelectorProps = {
+type SelectorProps = {
     label: string;
-    defaultValue: SortBy;
+    defaultValue: string;
     options: SelectorValuesOptions[];
-    handleSelectedChange: (value: SortBy) => void;
+    placeholder: string;
+    handleSelectedChange: (value: string) => void;
 }
 
-export const SortBySelector = ({ label, defaultValue, options, handleSelectedChange }: SortBySelectorProps) => {
-    const [inputSortBy, setInputSortBy] = useState<SortBy>(defaultValue);
+export const Selector = ({ label, defaultValue, options, placeholder, handleSelectedChange }: SelectorProps) => {
+    const [selectedInput, setSelectedInput] = useState<string>(defaultValue);
 
     const handleChange = (event: React.MouseEvent<HTMLSelectElement>) => {
         event.preventDefault();
-        handleSelectedChange(inputSortBy);
+        handleSelectedChange(selectedInput);
     }
     return (
         <Label>
             {label}
             <Select
-                value={inputSortBy}
-                onChange={(e) => setInputSortBy(e.target.value as SortBy)}
+                value={selectedInput}
+                onChange={(e) => setSelectedInput(e.target.value)}
                 onMouseOutCapture={(e) => handleChange(e)}
                 aria-label={label}
                 aria-describedby={`${label}-help`}
             >
-                <option value="">Ordenar por</option>
-                {options.map(order => <option value={order.id} key={order.id}>{order.name}</option>)}
+                <option value="">{placeholder}</option>
+                {options.map(o => <option value={o.id} key={o.id}>{o.name}</option>)}
             </Select>
             <span id={`${label}-help`} style={{display: "none"}}>
                 Selecione um {label} para filtrar os filmes.

@@ -4,10 +4,11 @@ import {Input, Label} from "../../styles.ts";
 type MemberMovieInputProps = {
     label: string;
     defaultValue: string;
+    placeholder: string;
     handleSelectedChange: (value: string) => void;
 }
 
-export const MemberMovieInput = ({ label, defaultValue, handleSelectedChange }: MemberMovieInputProps) => {
+export const MemberMovieInput = ({ label, defaultValue, placeholder, handleSelectedChange }: MemberMovieInputProps) => {
 
     const [inputValue, setInputValue] = useState<string>(defaultValue);
 
@@ -24,6 +25,7 @@ export const MemberMovieInput = ({ label, defaultValue, handleSelectedChange }: 
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onMouseOutCapture={(e) => handleChange(e)}
+                placeholder={placeholder}
             />
         </Label>
     );

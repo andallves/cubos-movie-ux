@@ -1,68 +1,81 @@
-import {
-    ClassificationMovies,
-    LanguageMovies,
-    OrderingMovies,
-    PopularityMovies,
-    StreamingMovies
-} from "../types/filter.ts";
+import {SelectorValuesOptions} from "../types/filter.ts";
+import {MovieLengthEnum} from "../enums/movieLength.ts";
 
-export const languagesMovies: LanguageMovies[] = [
-    { code: "en", name: "Inglês" },
-    { code: "es", name: "Espanhol" },
-    { code: "fr", name: "Francês" },
-    { code: "zh", name: "Chinês" },
-    { code: "hi", name: "Hindi"},
-    { code: "ja", name: "Japonês" },
-    { code: "ko", name: "Coreano" },
-    { code: "de", name: "Alemão" },
-    { code: "it", name: "Italiano" },
-    { code: "pt", name: "Português" },
-    { code: "ru", name: "Russo" },
-    { code: "ar", name: "Árabe" },
-    { code: "tr", name: "Turco" },
-    { code: "th", name: "Tailandês" },
-    { code: "sv", name: "Sueco" },
-    { code: "pl", name: "Polonês" },
-    { code: "nl", name: "Holandês" },
-    { code: "da", name: "Dinamarquês" },
-    { code: "no", name: "Norueguês" },
-    { code: "fi", name: "Finlandês" },
-    { code: "cs", name: "Tcheco" },
-    { code: "el", name: "Grego" },
-    { code: "he", name: "Hebraico" },
-    { code: "vi", name: "Vietnamita" },
-    { code: "ta", name: "Tâmil" },
-    { code: "te", name: "Telugu" },
-    { code: "bn", name: "Bengali" },
-    { code: "ml", name: "Malaiala" },
-    { code: "uk", name: "Ucraniano" },
+export const languagesMovies: SelectorValuesOptions[] = [
+    { id: "en", name: "Inglês" },
+    { id: "es", name: "Espanhol" },
+    { id: "fr", name: "Francês" },
+    { id: "zh", name: "Chinês" },
+    { id: "hi", name: "Hindi"},
+    { id: "ja", name: "Japonês" },
+    { id: "ko", name: "Coreano" },
+    { id: "de", name: "Alemão" },
+    { id: "it", name: "Italiano" },
+    { id: "pt", name: "Português" },
+    { id: "ru", name: "Russo" },
+    { id: "ar", name: "Árabe" },
+    { id: "tr", name: "Turco" },
+    { id: "th", name: "Tailandês" },
+    { id: "sv", name: "Sueco" },
+    { id: "pl", name: "Polonês" },
+    { id: "nl", name: "Holandês" },
+    { id: "da", name: "Dinamarquês" },
+    { id: "no", name: "Norueguês" },
+    { id: "fi", name: "Finlandês" },
+    { id: "cs", name: "Tcheco" },
+    { id: "el", name: "Grego" },
+    { id: "he", name: "Hebraico" },
+    { id: "vi", name: "Vietnamita" },
+    { id: "ta", name: "Tâmil" },
+    { id: "te", name: "Telugu" },
+    { id: "bn", name: "Bengali" },
+    { id: "ml", name: "Malaiala" },
+    { id: "uk", name: "Ucraniano" },
 ];
 
-export const orderingMovies: OrderingMovies[] = [
-    { id: 1, code: "title.desc", name: "Título"},
-    { id: 2, code: "popularity.desc", name: "Popularidade" },
-    { id: 3, code: "primary_release_date.desc", name: "Ano de lançamento" },
-    { id: 4, code: "vote_count.desc", name: "Mais votado" }
+export const orderingMovies: SelectorValuesOptions[] = [
+    { id: "title.desc", name: "Título"},
+    { id: "popularity.desc", name: "Popularidade" },
+    { id: "primary_release_date.desc", name: "Ano de lançamento" },
+    { id: "vote_count.desc", name: "Mais votado" }
 ];
 
-export const classificationMovies: ClassificationMovies[] = [
-    { value: "", name:"Todos" },
-    { value: "L", name: "Livre" },
-    { value: "10", name: "12 anos" },
-    { value: "12", name: "16 anos" },
-    { value: "14", name: "12 anos" },
-    { value: "16", name: "16 anos" },
-    { value: "18", name: "18 anos" }
+export const classificationMovies: SelectorValuesOptions[] = [
+    { id: "", name:"Todos" },
+    { id: "L", name: "Livre" },
+    { id: "10", name: "12 anos" },
+    { id: "12", name: "16 anos" },
+    { id: "14", name: "12 anos" },
+    { id: "16", name: "16 anos" },
+    { id: "18", name: "18 anos" }
 ];
 
-export const popularityMovies: PopularityMovies[] = [
-    { value: "80", name: "Alta (80+)" },
-    { value: "79", name: "Baixa (menos de 80)" },
+export const popularityMovies: SelectorValuesOptions[] = [
+    { id: "80", name: "Alta (80+)" },
+    { id: "79", name: "Baixa (menos de 80)" },
 ]
 
-export const ratingMovies = Array.from({ length: 10 }, (_, index) => index);
+export const lengthMovieMovies: SelectorValuesOptions[] = [
+    { id: Number(MovieLengthEnum.todos), name: 'Todos' },
+    { id: Number(MovieLengthEnum.curta), name: 'Curta (menos de 60 minutos)' },
+    { id: Number(MovieLengthEnum.media), name: 'Média (60-120 minutos)' },
+    { id: Number(MovieLengthEnum.longa), name: 'Longa (mais de 120 minutos)' },
+]
 
-export const streamingMovies: StreamingMovies[] = [
+export const ratingMovies: SelectorValuesOptions[] = [
+    { id: 1, name: "1"},
+    { id: 2, name: "2"},
+    { id: 3, name: "3"},
+    { id: 4, name: "4"},
+    { id: 5, name: "5"},
+    { id: 6, name: "6"},
+    { id: 7, name: "7"},
+    { id: 8, name: "8"},
+    { id: 9, name: "9"},
+    { id: 10, name: "10"},
+]
+
+export const streamingMovies: SelectorValuesOptions[] = [
     { id: "8", name: "Netflix" },
     { id: "9", name: "Amazon Prime Video" },
     { id: "337", name: "Disney Plus" },

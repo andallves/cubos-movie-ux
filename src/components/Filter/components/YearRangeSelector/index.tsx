@@ -27,27 +27,37 @@ export const YearRangeSelector = ({ label, handleSelectedChange }: YearRangeSele
                 <Select
                     value={inputStartYear ?? ""}
                     onChange={(e) => setInputStartYear(e.target.value)}
+                    aria-label={label}
+                    aria-describedby={`${label}-help`}
                 >
                     <option value="">Selecione o ano inicial</option>
                     {years.map((year) => (
                         <option key={year} value={year}>
-                        {year}
+                            {year}
                         </option>
                     ))}
                 </Select>
+                <span id={`${label}-help`} style={{display: "none"}}>
+                    Selecione um {label} para filtrar os filmes.
+                </span>
                 a
                 <Select
                     value={inputEndYear ?? ""}
                     onChange={(e) => setInputEndYear(e.target.value)}
                     onMouseOutCapture={(e) => handleChange(e)}
+                    aria-label={label}
+                    aria-describedby={`${label}-help`}
                 >
                     <option value="">Selecione o ano final</option>
                     {years.map((year) => (
                         <option key={year} value={year}>
-                        {year}
+                            {year}
                         </option>
                     ))}
                 </Select>
+                <span id={`${label}-help`} style={{display: "none"}}>
+                    Selecione um {label} para filtrar os filmes.
+                </span>
             </SelectContainer>
         </Label>
     )

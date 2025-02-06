@@ -88,7 +88,7 @@ export const Input = styled.input`
         align-items: center;
         flex: 1 0 0;
         outline: 1px solid rgb(118, 118, 118);
-        padding: 1.2rem .6rem;
+        padding: 1.2rem ;
         border: none;
         border-radius: .4rem;
         background: ${theme.colors.gray60};
