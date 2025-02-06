@@ -10,7 +10,7 @@ export const ContainerPoster = styled.div<ImageContainerProps>`
     width: 40vw;
     min-width: 14rem;
     max-width: 25rem;
-    height: 35vh;
+    height: 65vw;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
@@ -34,19 +34,27 @@ export const ContainerPoster = styled.div<ImageContainerProps>`
         height: 100%;
         background: linear-gradient(180deg, rgba(204, 204, 204, 0.00) 0%, rgba(0, 0, 0, 0.63) 50%, #000 100%);
     }
-    @media (min-width: 598px) {
-        width: 16rem;
-        height: 40vh;
-    }
 
     @media (min-width: 678px) {
-        width: 20rem;
-        height: 50vh;
+        width: 20vw;
+        height: 35vw;
+    }
+    
+    @media (min-width: 1024px) {
+        width: 16vw;
+        height: 25vw;
+        color: rgba(0,0,0, 0.50)
     }
 
-    @media (min-width: 1000px) {
-        width: 16vw;
-        height: 45vh;
+    @media (min-width: 1800px) {
+        width: 30vw;
+        height: 20vw;
+        color: rgba(0,0,0, 0.50)
+    }
+
+    @media (min-width: 2300px) {
+        width: 40vw;
+        height: 16vw;
         color: rgba(0,0,0, 0.50)
     }
 `;
