@@ -2,9 +2,9 @@ import {IMovieCustomDataService} from "./IMovieCustomDataService.ts";
 import {languagesMovies} from "../../utils/filter-input-values.ts";
 
 export const movieCustomDataService: IMovieCustomDataService = {
-    formatCountryCodeToName(countryCode: string): string {
-        const languageMovie = languagesMovies.find((language) => language.code === countryCode);
-        return languageMovie?.name || countryCode;
+    formatCountryCodeToName(countryId: string): string {
+        const languageMovie = languagesMovies.find((language) => language.id === countryId);
+        return languageMovie?.name ?? countryId;
     },
 
     formatData(data: string): string {

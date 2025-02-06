@@ -177,12 +177,12 @@ export const GenreTitle = styled.span`
     line-height: normal;
 `;
 
-export const GenreTagContainer = styled.div`
+export const GenreTagContainer = styled.ul`
     display: flex;
     gap: 1.6rem;
 `;
 
-export const GenreTag = styled.div`
+export const GenreTag = styled.li`
     display: flex;
     padding: 8px;
     align-items: center;
