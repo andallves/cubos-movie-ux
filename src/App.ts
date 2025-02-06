@@ -3,6 +3,7 @@ import backgroundImage from './assets/backgropund-krists-luhaers-unsplash.png';
 
 export const BackgroundContainer = styled.div`
     box-sizing: border-box;
+    width: 100%;
     position: relative;
     background: lightgray url(${backgroundImage}) no-repeat fixed 0;
     z-index: 10;
